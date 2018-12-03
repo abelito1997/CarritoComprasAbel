@@ -15,7 +15,8 @@ public class MainActivityIniciar extends AppCompatActivity
       {
           Button ir;
           Button ini;
-          Button iniNav;
+          Button face;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,7 +58,22 @@ public class MainActivityIniciar extends AppCompatActivity
             }
         });
 
+        face=(Button)findViewById(R.id.btnfacebook);
+        face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                //Context context = getApplicationContext();
+                //CharSequence text = "Hello toast!";
+                //int duration = Toast.LENGTH_SHORT;
+
+                //Toast toast = Toast.makeText(context, text, duration);
+                //toast.show();
+                Intent face=new Intent(MainActivityIniciar.this, MainActivity.class);
+                startActivity(face);
+
+            }
+        });
 
 
     }
