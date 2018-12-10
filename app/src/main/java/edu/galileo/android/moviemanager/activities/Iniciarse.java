@@ -22,7 +22,7 @@ public class Iniciarse extends AppCompatActivity {
      //   rvMovies.setHasFixedSize(true);
       //  rvMovies.setLayoutManager(llm);
 
-        //MovieRecyclerViewAdapter adapter = new MovieRecyclerViewAdapter(getContext(), movies);
+        //MovieRecyclerViewAdapter adapter = new MovieRecyclerViewAdapter(getContext(), instrumentos);
        // rvMovies.setAdapter(adapter);
 
 }

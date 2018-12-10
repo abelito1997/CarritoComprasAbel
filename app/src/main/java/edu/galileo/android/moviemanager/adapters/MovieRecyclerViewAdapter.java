@@ -3,12 +3,14 @@ package edu.galileo.android.moviemanager.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -18,8 +20,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.galileo.android.moviemanager.R;
-import edu.galileo.android.moviemanager.activities.MovieDetailActivity;
-import edu.galileo.android.moviemanager.models.Movie;
+import edu.galileo.android.moviemanager.activities.MusicaDetailActivity;
+import edu.galileo.android.moviemanager.models.Instrumentos;
 
 /**
  * Created by isabelpalomar.
@@ -27,11 +29,11 @@ import edu.galileo.android.moviemanager.models.Movie;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder> {
 
-    List<Movie> movies;
+    List<Instrumentos> instrumentos;
     Context context;
 
-    public MovieRecyclerViewAdapter(Context context, List<Movie> movies){
-        this.movies = movies;
+    public MovieRecyclerViewAdapter(Context context, List<Instrumentos> instrumentos){
+        this.instrumentos = instrumentos;
         this.context = context;
 
     }
@@ -51,18 +53,34 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Movie producto = movies.get(position);
+        Instrumentos producto = instrumentos.get(position);
         holder.txtTitulo.setText(producto.getNombInstrumento());
         holder.txtDescripcion.setText(producto.getCategoria());
+        holder.estrellas.setRating((float)producto.getRating());
         if(producto.getHayDescuento().contains("S")){
-            holder.textOferta.setText("OFERTA");
+            /*holder.textOferta.setText("OFERTA");
             holder.textViewPrice_s2.setText("$");
             holder.txtPrecio.setText(String.valueOf(producto.getValorDescuento()));
             holder.textPrecioDescuento.setText(String.valueOf(producto.getPrecio()));
             holder.textViewPrice_s2.setTextColor(Color.parseColor("#c0c0c0"));
             holder.textPrecioDescuento.setTextColor(Color.parseColor("#c0c0c0"));
             holder.txtPrecio.setTextColor(Color.parseColor("#ff0000"));
-            holder.txtPrecio.setTextColor(Color.parseColor("#ff0000"));
+            holder.txtPrecio.setTextColor(Color.parseColor("#ff0000"));*/
+
+            holder.textOferta.setText("OFERTA");
+            //Normal
+            holder.txtPrecio.setText(String.valueOf(producto.getValorDescuento()));
+           // holder.txtPrecio.setTextColor(Color.parseColor("#ff0000"));
+            //Tachado
+            holder.textPrecioDescuento.setPaintFlags(holder.textPrecioDescuento.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+
+            //descuesto
+            holder.textViewPrice_s2.setText("$");
+            holder.textViewPrice_s2.setTextColor(Color.parseColor("#c0c0c0"));
+            holder.textPrecioDescuento.setText(String.valueOf(producto.getPrecio()));
+           // holder.textPrecioDescuento.setTextColor(Color.parseColor("#c0c0c0"));
+            //holder.txtPrecio.setTextColor(Color.parseColor("#ff0000"));
+
 
         }else{
             holder.txtPrecio.setText(String.valueOf(producto.getPrecio()));
@@ -94,7 +112,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return instrumentos.size();
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -122,6 +140,9 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         TextView textOferta;
         @BindView(R.id.textViewPrice_s2)
         TextView textViewPrice_s2;
+        @BindView(R.id.myRatingBar)
+        RatingBar estrellas;
+
 
 
 
@@ -135,10 +156,10 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         @Override
         public void onClick(View v) {
 
-            Movie movie = movies.get(getAdapterPosition());
+            Instrumentos instrumentos = MovieRecyclerViewAdapter.this.instrumentos.get(getAdapterPosition());
 
-            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-            intent.putExtra("MOVIE", movie);
+            Intent intent = new Intent(getContext(), MusicaDetailActivity.class);
+            intent.putExtra("MOVIE", instrumentos);
             getContext().startActivity(intent);
 
         }

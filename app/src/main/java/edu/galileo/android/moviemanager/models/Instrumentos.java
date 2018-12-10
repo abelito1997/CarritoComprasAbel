@@ -3,7 +3,7 @@ package edu.galileo.android.moviemanager.models;
 
 import java.io.Serializable;
 
-public class Movie implements Serializable{
+public class Instrumentos implements Serializable{
     int id;
     String nombInstrumento;
     String categoria;
@@ -13,8 +13,9 @@ public class Movie implements Serializable{
     String valorDescuento;
     String url_Instrumento_image;
     String url_Instrumento_poster;
+    double rating;
 
-    public Movie(int id, String nombInstrumento, String categoria, double precio, String hayDescuento, int porcDescuento, String valorDescuento, String url_Instrumento_image, String url_Instrumento_poster) {
+    public Instrumentos(int id, String nombInstrumento, String categoria, double precio, String hayDescuento, int porcDescuento, String valorDescuento, String url_Instrumento_image, String url_Instrumento_poster, double rating) {
         this.id = id;
         this.nombInstrumento = nombInstrumento;
         this.categoria = categoria;
@@ -24,6 +25,7 @@ public class Movie implements Serializable{
         this.valorDescuento = valorDescuento;
         this.url_Instrumento_image = url_Instrumento_image;
         this.url_Instrumento_poster = url_Instrumento_poster;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -72,7 +74,30 @@ public class Movie implements Serializable{
         this.valorDescuento = valorDescuento;
     }
 
-/*
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Instrumentos instrumentos = (Instrumentos) o;
+        return getId() == instrumentos.getId();
+    }
+
+    @Override
+    public int hashCode() {
+
+        return getId();
+    }
+
+
+    /*
     String id;
     String title;
     String overview;
@@ -84,7 +109,7 @@ public class Movie implements Serializable{
 
 
 
-    public Movie(String id, String title, String overview, float voteAverage, float voteCount, String posterPath, String backdropPath) {
+    public Instrumentos(String id, String title, String overview, float voteAverage, float voteCount, String posterPath, String backdropPath) {
         this.id = id;
         this.title = title;
         this.overview = overview;

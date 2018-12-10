@@ -1,5 +1,6 @@
 package edu.galileo.android.moviemanager.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,11 +16,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import edu.galileo.android.moviemanager.R;
-import edu.galileo.android.moviemanager.fragments.Categoria;
-import edu.galileo.android.moviemanager.fragments.IniciarSesion;
+import edu.galileo.android.moviemanager.fragments.ContenidoGeneralFragment;
+import edu.galileo.android.moviemanager.fragments.categoriaViento;
 import edu.galileo.android.moviemanager.fragments.MiCarrito_fragment;
-import edu.galileo.android.moviemanager.fragments.NowPlayingFragment;
-import edu.galileo.android.moviemanager.fragments.UpcomingFragment;
+import edu.galileo.android.moviemanager.fragments.OfertaFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        showFragment(NowPlayingFragment.class);
+        showFragment(ContenidoGeneralFragment.class);
     }
 
     @Override
@@ -93,19 +93,28 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_cont) {
             this.setTitle("Instrumentos en general");
             this.setTitleColor(Color.parseColor("#00ffff"));
-            fragment = NowPlayingFragment.class;
+            fragment = ContenidoGeneralFragment.class;
             showFragment(fragment);
-         //   fragment = Categoria.class;
+        }else if (id == R.id.nav_music) {
+                this.setTitle("Categorias");
+                fragment = categoriaViento.class;
+                showFragment(fragment);
+            }
+         //   fragment = categoriaViento.class;
            // showFragment(fragment);
-        } else if (id == R.id.nav_ofert) {
+        else if (id == R.id.nav_ofert) {
             this.setTitle("instrumentos  en ofertas");
             this.setTitleColor(Color.parseColor("#00ffff"));
-            fragment = UpcomingFragment.class;
+            fragment = OfertaFragment.class;
             showFragment(fragment);
         } else if (id == R.id.nav_compras) {
             this.setTitle("Mis compras");
             fragment = MiCarrito_fragment.class;
             showFragment(fragment);
+        }else if (id == R.id.nav_logout) {
+            startActivity(new Intent(MainActivity.this,MainActivityRegistro.class));
+            //fragment = MainActivityRegistro.class;
+            //showFragment(fragment);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
